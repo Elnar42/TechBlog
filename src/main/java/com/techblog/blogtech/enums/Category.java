@@ -13,7 +13,7 @@ public enum Category {
     ARTIFICIAL_INTELLIGENCE("Artificial Intelligence"),
     CLOUD_COMPUTING("Cloud Computing"),
     CYBER_SECURITY("Cyber Security"),
-    BLOCKCHAIN("Blockchain"),
+    BLOCKCHAIN("Bloc2kchain"),
     INTERNET_OF_THINGS("Internet of Things"),
     TECH_NEWS("Tech News"),
     STARTUPS("Startups"),
