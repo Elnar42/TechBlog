@@ -1,10 +1,9 @@
 package com.techblog.blogtech.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,5 +22,14 @@ public class Follower extends MainEntity {
     @ManyToOne
     @JoinColumn(name = "followed_id", referencedColumnName = "id")
     private Author followed;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime followStartedDate;
+
+
+    @PrePersist
+    public void prePersist() {
+        followStartedDate = LocalDateTime.now();
+    }
 
 }

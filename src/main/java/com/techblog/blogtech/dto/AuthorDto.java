@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AuthorDto {
 
+    @Null
     private Long id;
 
     @NotBlank
@@ -21,6 +21,9 @@ public class AuthorDto {
 
     @NotBlank
     private String lastName;
+
+    @NotBlank
+    private String email;
 
     @Nullable
     @Lob

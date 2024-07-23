@@ -2,7 +2,6 @@ package com.techblog.blogtech.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,21 +9,18 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class FollowerDto {
+public class BookmarkDto {
 
     @Null
     private Long id;
 
-    @Positive
     @NotNull
-    private Long follower_id;
+    private Long author_id;
 
-    @Positive
     @NotNull
-    private Long followed_id;
-
+    private Long post_id;
 
     @Null
-    private LocalDateTime followStartedDate;
+    private LocalDateTime savedDate;
 
 }

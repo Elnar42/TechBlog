@@ -1,10 +1,9 @@
 package com.techblog.blogtech.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,5 +21,14 @@ public class Like extends MainEntity {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime likeDate;
+
+
+    @PrePersist
+    public void prePersist() {
+        likeDate = LocalDateTime.now();
+    }
 
 }

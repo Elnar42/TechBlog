@@ -1,15 +1,18 @@
 package com.techblog.blogtech.services;
 
 import com.techblog.blogtech.domain.Author;
-import com.techblog.blogtech.dto.AuthorDto;
-import com.techblog.blogtech.mappers.MainMapper;
-import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import com.techblog.blogtech.repository.AuthorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
-public class AuthorService extends MainService<AuthorDto, Long, Author> {
+public class AuthorService {
+    private final AuthorRepository repository;
 
-    public AuthorService(JpaRepositoryImplementation<Author, Long> repository, MainMapper<AuthorDto, Author> mapper) {
-        super(repository, mapper);
+    public Author loadUserByUserEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow();
     }
+
 }

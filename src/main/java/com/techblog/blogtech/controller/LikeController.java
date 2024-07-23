@@ -6,7 +6,10 @@ import com.techblog.blogtech.services.LikeService;
 import com.techblog.blogtech.services.MainService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -21,23 +24,13 @@ public class LikeController extends MainController<LikeDto, Long, Like> {
         this.likeService = likeService;
     }
 
-    @GetMapping("/user/{id}")
-    public List<LikeDto> getLikeByUser(
-            @PathVariable Long id,
+    @GetMapping("/mine")
+    public List<LikeDto> getPostsThatILike(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
-    ) {
+            @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return likeService.getLikesByUserId(id, pageable);
+        return likeService.getPostsThatILike(pageable);
     }
 
-    @GetMapping("/post/{id}")
-    public List<LikeDto> getLikeByPost(@PathVariable Long id,
-                                       @RequestParam(defaultValue = "0") int page,
-                                       @RequestParam(defaultValue = "20") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        return likeService.getLikesByPostId(id, pageable);
-    }
 
 }

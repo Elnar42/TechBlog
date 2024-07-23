@@ -8,11 +8,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PostMapper extends MainMapper<PostDto, Post> {
 
-    @Override
     @Mapping(target = "author_id", source = "author.id")
     PostDto toDto(Post entity);
 
-    @Override
+    @Mapping(target = "comments", ignore = true)
     @Mapping(target = "author.id", source = "author_id")
     Post toEntity(PostDto dto);
 

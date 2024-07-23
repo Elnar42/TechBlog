@@ -3,6 +3,7 @@ package com.techblog.blogtech.services;
 import com.techblog.blogtech.domain.MainEntity;
 import com.techblog.blogtech.exceptions.NoDataFound;
 import com.techblog.blogtech.mappers.MainMapper;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Getter
 @RequiredArgsConstructor
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
 
@@ -45,4 +47,6 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
     public void deleteById(ID id) {
         repository.delete(repository.findById(id).orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now())));
     }
+
+
 }

@@ -1,11 +1,7 @@
 package com.techblog.blogtech.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import lombok.*;
-import org.mapstruct.control.DeepClone;
 
 import java.time.LocalDateTime;
 
@@ -15,12 +11,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Comment extends MainEntity {
-
-
-    private String content;
-
-    private LocalDateTime commentDate;
+@Table(name = "bookmarks")
+public class Bookmark extends MainEntity {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
@@ -30,10 +22,14 @@ public class Comment extends MainEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime savedDate;
+
+
     @PrePersist
     public void prePersist() {
-        commentDate = LocalDateTime.now();
+        savedDate = LocalDateTime.now();
     }
-
 
 }

@@ -43,5 +43,6 @@ public class Post extends MainEntity {
     @PrePersist
     public void prePersist() {
         publishedDate = LocalDateTime.now();
+
     }
 }
