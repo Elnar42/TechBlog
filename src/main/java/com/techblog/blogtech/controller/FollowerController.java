@@ -19,23 +19,23 @@ public class FollowerController extends MainController<FollowerDto, Long, Follow
         this.followerService = followerService;
     }
 
-    @PostMapping("/{followerId}/follow/{followedId}")
-    public FollowerDto followUser(@PathVariable Long followerId, @PathVariable Long followedId) {
-        return followerService.followUser(followerId, followedId);
+    @PostMapping("/follow/{id}")
+    public FollowerDto followUser(@PathVariable Long id) {
+        return followerService.followUser(id);
     }
 
-    @DeleteMapping("/{followerId}/unfollow/{followedId}")
-    public void unfollowUser(@PathVariable Long followerId, @PathVariable Long followedId) {
-        followerService.unfollowUser(followerId, followedId);
+    @DeleteMapping("/unfollow/{id}")
+    public void unfollowUser(@PathVariable Long id) {
+        followerService.unfollowUser(id);
     }
 
-    @GetMapping("/follower/{userId}")
-    public List<FollowerDto> getFollowers(@PathVariable Long userId) {
-        return followerService.findFollowersOfUserById(userId);
+    @GetMapping("/mine")
+    public List<FollowerDto> getFollowers() {
+        return followerService.findMyFollowers();
     }
 
-    @GetMapping("/followedBy/{userId}")
-    public List<FollowerDto> getFollowedUsers(@PathVariable Long userId) {
-        return followerService.findUsersFollowedByUser(userId);
+    @GetMapping("/followedByMe")
+    public List<FollowerDto> getUserThatIFollow() {
+        return followerService.findUsersThatIFollow();
     }
 }

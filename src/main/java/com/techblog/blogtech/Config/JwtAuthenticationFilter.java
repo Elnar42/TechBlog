@@ -1,5 +1,7 @@
 package com.techblog.blogtech.Config;
 
+import com.techblog.blogtech.domain.Token;
+import com.techblog.blogtech.repository.TokenRepository;
 import com.techblog.blogtech.services.AuthorService;
 import com.techblog.blogtech.services.JwtService;
 import jakarta.servlet.FilterChain;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -23,6 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final AuthorService authorService;
+    private final TokenRepository tokenRepository;
 
     @Override
     protected void doFilterInternal(
@@ -40,7 +44,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwtService.extractAllClaims(token);
         String email = jwtService.extractUsername();
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
+            Optional<Token> byToken = tokenRepository.findByToken(token);
+            if (byToken.isPresent()) {
+                Token accessToken = byToken.get();
+                if (accessToken.isExpired() || accessToken.isRevoked()) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+            }
             UserDetails userDetails = authorService.loadUserByUserEmail(email);
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     userDetails,

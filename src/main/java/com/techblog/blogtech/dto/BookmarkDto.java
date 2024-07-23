@@ -4,9 +4,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
 @Getter
 @AllArgsConstructor
 public class BookmarkDto {
@@ -14,7 +16,7 @@ public class BookmarkDto {
     @Null
     private Long id;
 
-    @NotNull
+    @Null
     private Long author_id;
 
     @NotNull

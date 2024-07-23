@@ -6,7 +6,10 @@ import com.techblog.blogtech.services.BookmarkService;
 import com.techblog.blogtech.services.MainService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,13 +23,12 @@ public class BookmarkController extends MainController<BookmarkDto, Long, Bookma
         this.bookmarkService = bookmarkService;
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/mine")
     public List<BookmarkDto> getBookmarksByUserId(
-            @PathVariable Long id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return bookmarkService.findByAuthorId(id, pageable);
+        return bookmarkService.getMySavedPosts(pageable);
     }
 }

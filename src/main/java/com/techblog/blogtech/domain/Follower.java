@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "followers")
 public class Follower extends MainEntity {
 
-
     @ManyToOne
     @JoinColumn(name = "follower_id", referencedColumnName = "id")
     private Author follower;

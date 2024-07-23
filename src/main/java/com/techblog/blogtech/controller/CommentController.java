@@ -20,12 +20,12 @@ public class CommentController extends MainController<CommentDto, Long, Comment>
         this.commentService = commentService;
     }
 
-    @GetMapping("/author/{id}")
-    public Page<CommentDto> getCommentByAuthorId(@PathVariable Long id,
-                                                 @RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "20") int size) {
+    @GetMapping("/mine")
+    public Page<CommentDto> getCommentByAuthorId(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return commentService.getCommentsByAuthorId(id, pageable);
+        return commentService.getMyAllComments(pageable);
     }
 
     @GetMapping("/post/{id}")

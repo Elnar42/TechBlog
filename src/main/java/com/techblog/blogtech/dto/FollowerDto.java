@@ -5,9 +5,11 @@ import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
 @Getter
 @AllArgsConstructor
 public class FollowerDto {
@@ -15,8 +17,7 @@ public class FollowerDto {
     @Null
     private Long id;
 
-    @Positive
-    @NotNull
+    @Null
     private Long follower_id;
 
     @Positive
