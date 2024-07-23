@@ -1,4 +1,4 @@
-package com.techblog.blogtech.Config;
+package com.techblog.blogtech.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techblog.blogtech.domain.AuthenticationRequest;

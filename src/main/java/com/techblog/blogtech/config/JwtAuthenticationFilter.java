@@ -1,4 +1,4 @@
-package com.techblog.blogtech.Config;
+package com.techblog.blogtech.config;
 
 import com.techblog.blogtech.domain.Token;
 import com.techblog.blogtech.repository.TokenRepository;
